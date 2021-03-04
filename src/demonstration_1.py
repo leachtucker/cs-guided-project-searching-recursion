@@ -36,6 +36,49 @@ list I came up was absolutely huge, so make sure your solution is efficient.
 *Note: you should be able to come up with a solution that has O(log n) time
 complexity.*
 """
-def find_rotation_point(surnames):
-    # Your code here
+names = [
+    'liu',
+    'mcdowell',
+    'nixon',
+    'sparks',
+    'zhang',
+    'ahmed',
+    'brandt',
+    'davenport',
+    'farley',
+    'glover',
+    'kennedy',
+]
 
+names2 = [
+    'frankie',
+    'geegee',
+    'Harley',
+    'ava',
+    'becca',
+    'charlie',
+]
+
+def find_rotation_point(surnames):
+    floor = 0
+    ceiling = len(surnames) - 1
+    first_name = surnames[0]
+
+    while floor < ceiling:
+        guessIndex = ((ceiling - floor) // 2) + floor
+        guess = surnames[guessIndex]
+        prevName = surnames[guessIndex - 1]
+
+        if prevName > guess:
+            return guessIndex
+
+        if guess < first_name:
+            ceiling = guessIndex
+
+        if guess > first_name:
+            floor = guessIndex
+
+
+
+print(find_rotation_point(names))
+print(find_rotation_point(names2))
