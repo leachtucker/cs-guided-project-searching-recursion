@@ -18,12 +18,37 @@ make sure that your solution minimizes the number of API calls.
 
 Example:
 
-Given `n = 5`, and `draft = 4` is the first draft containing a typo.
+Given `n = 5`, and `draft = 4` is the first draft containing a typo. <--- Five drafts and draft num 4 has the og typo
 
 containsTypo(3) -> False
 containsTypo(5) -> True
 containsTypo(4) -> True
 """
-def firstDraftWithTypo(n):
-    # Your code here
+#
+def containsTypo(n):
+    if n >= 4:
+        return True
+    else:
+        return False
 
+def firstDraftWithTypo(n):
+    floor = 1
+    ceiling = n
+
+    while floor < ceiling:
+        guess = ((ceiling - floor) // 2) + floor
+        print(f'guess: {guess}')
+
+        if guess == ceiling:
+            return floor
+        elif guess == floor:
+            return ceiling
+
+
+        # Move floor and ceiling accordingly
+        if containsTypo(guess):
+            ceiling = guess
+        else:
+            floor = guess
+
+print(firstDraftWithTypo(100000))
